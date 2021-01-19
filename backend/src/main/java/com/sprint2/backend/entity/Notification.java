@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "notification")
 @Getter
@@ -26,6 +27,9 @@ public class Notification {
 
     @Column(name = "status", columnDefinition = "BIT")
     private Boolean status = false;
+
+    @Column(name = "create_date", columnDefinition = "DATETIME")
+    private LocalDateTime createDate;
 
     // relationship
 

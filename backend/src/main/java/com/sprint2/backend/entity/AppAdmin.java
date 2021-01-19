@@ -21,6 +21,12 @@ public class AppAdmin {
     @Column(name = "full_name", columnDefinition = "VARCHAR(50)")
     private String fullName;
 
+    @Column(name = "mail", columnDefinition = "VARCHAR(50)")
+    private String mail;
+
+    @Column(name = "address", columnDefinition = "VARCHAR(50)")
+    private String address;
+
     // relationship
 
     @OneToOne
