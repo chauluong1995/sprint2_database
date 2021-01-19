@@ -1,12 +1,14 @@
 package com.sprint2.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "app_account")
 @Getter
@@ -34,19 +36,23 @@ public class AppAccount {
 
     // relationship
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "app_role_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private AppRole appRole;
 
     @OneToOne(mappedBy = "appAccount", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private AppAdmin appAdmin;
 
     @OneToOne(mappedBy = "appAccount", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Employee employee;
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private Teacher teacher;
 
     @OneToOne(mappedBy = "appAccount", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Customer customer;
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private Student student;
+
+    @OneToMany(mappedBy = "appAccount", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private List<Notification> notificationList;
 }

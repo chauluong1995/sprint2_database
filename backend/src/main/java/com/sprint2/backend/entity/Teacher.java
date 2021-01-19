@@ -1,5 +1,7 @@
 package com.sprint2.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,42 +9,45 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
-@Entity(name = "employee")
+@Entity(name = "teacher")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
-    @Column(name = "employee_code", columnDefinition = "VARCHAR(50)")
-    private String employeeCode;
-
     @Column(name = "full_name", columnDefinition = "VARCHAR(50)")
     private String fullName;
 
-    @Column(name = "gender", columnDefinition = "BIT")
-    private Boolean gender = false;
+    @Column(name = "teacher_code", columnDefinition = "VARCHAR(50)")
+    private String teacherCode;
 
     @Column(name = "email", columnDefinition = "VARCHAR(50)")
     private String email;
 
-    @Column(name = "birthday", columnDefinition = "DATE")
-    private LocalDate birthday;
+    @Column(name = "identity_number", columnDefinition = "VARCHAR(50)")
+    private LocalDate identityNumber;
 
     @Column(name = "phone", columnDefinition = "VARCHAR(50)")
     private String phone;
-
-    @Column(name = "position", columnDefinition = "VARCHAR(50)")
-    private String position;
 
     // relationship
 
     @OneToOne
     @JoinColumn(name = "app_account_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private AppAccount appAccount;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private List<StudentGroup> studentGroupList;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private List<Thesis> thesisList;
 }
