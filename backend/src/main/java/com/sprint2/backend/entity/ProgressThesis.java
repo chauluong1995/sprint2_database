@@ -8,35 +8,45 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "thesis_detail")
+@Entity(name = "progress_thesis")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ThesisDetail {
+public class ProgressThesis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
-    @Column(name = "progress_file", columnDefinition = "VARCHAR(250)")
-    private String progressFile;
+    @Column(name = "name_detail", columnDefinition = "VARCHAR(50)")
+    private String nameDetail;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(250)")
-    private String description;
+    @Column(name = "file", columnDefinition = "VARCHAR(250)")
+    private String file;
 
-    @Column(name = "percent", columnDefinition = "DOUBLE")
-    private Double percent;
+    @Column(name = "mark", columnDefinition = "BIGINT")
+    private Long mark;
+
+    @Column(name = "status", columnDefinition = "BIGINT")
+    private Long status;
 
     @Column(name = "submit_date", columnDefinition = "DATETIME")
     private LocalDateTime submitDate;
+
+    @Column(name = "progress", columnDefinition = "BIGINT")
+    private Long progress;
 
     @Column(name = "comment", columnDefinition = "VARCHAR(250)")
     private String comment;
 
     // relationship
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private CheckThesis checkThesis;
+
+//    @OneToOne
+//    @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+//    private CheckThesis checkThesis;
 }

@@ -36,12 +36,6 @@ public class Student {
     @Column(name = "position", columnDefinition = "BIT")
     private Boolean position = false;
 
-    @Column(name = "teacher", columnDefinition = "VARCHAR(50)")
-    private String teacher;
-
-    @Column(name = "topic", columnDefinition = "VARCHAR(50)")
-    private String topic;
-
     // relationship
 
     @OneToOne
@@ -55,4 +49,8 @@ public class Student {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private StudentGroup studentGroup;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "class_requirement_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+    private ClassRequirement classRequirement;
 }
