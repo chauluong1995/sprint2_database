@@ -34,6 +34,9 @@ public class Teacher {
     @Column(name = "identity_number", columnDefinition = "VARCHAR(50)")
     private LocalDate identityNumber;
 
+    @Column(name = "number_student", columnDefinition = "BIGINT")
+    private Long numberStudent;
+
     @Column(name = "phone", columnDefinition = "VARCHAR(50)")
     private String phone;
 
