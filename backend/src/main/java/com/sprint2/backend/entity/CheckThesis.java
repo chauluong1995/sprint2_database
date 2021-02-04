@@ -38,6 +38,10 @@ public class CheckThesis {
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private List<ProgressThesis> progressThesisList;
 
+    @OneToOne
+    @JoinColumn(name = "student_group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+    private StudentGroup studentGroup;
+
 //    @OneToOne(mappedBy = "checkThesis", cascade = CascadeType.ALL)
 //    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 //    private ThesisDetail thesisDetail;
